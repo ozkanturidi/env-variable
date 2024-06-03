@@ -4,9 +4,16 @@ on:
     branches:
       - main
       - dev
+env:
+  MONGODB_DB_NAME: dbname
+
 jobs:
   test:
-    environment: testing
+    env:
+      MONGODB_PASSWORD: QvmfjFLkGtB8c5uW
+      MONGODB_USERNAME: ozkannturidi
+      MONGODB_CLUSTER_ADDRESS: cluster0.4xnrh81.mongodb.net
+      PORT: 8080
     runs-on: ubuntu-latest
     steps:
       - name: Get Code
@@ -19,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Run server
-        run: npm start & npx wait-on http://127.0.0.1:XYZ
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
         run: npm test
       - name: Output information
@@ -29,5 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Output information
-        run: |        
-          echo "..."
+        run: |
+          echo "${{ env.MONGODB_USERNAME }}"
+          echo "${{ env.MONGODB_DB_NAME }}"
