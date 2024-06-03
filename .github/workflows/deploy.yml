@@ -27,7 +27,7 @@ jobs:
         run: npm ci
       - name: Output MongoDB Connection Info
         run: |
-          echo "mongodb+srv://${{ env.MONGODB_USERNAME }}:***@${{ env.MONGODB_CLUSTER_ADDRESS }}/${{ env.MONGODB_DB_NAME }}?retryWrites=true&w=majority"
+          echo "Connection string: mongodb+srv://${{ env.MONGODB_USERNAME }}:***@${{ env.MONGODB_CLUSTER_ADDRESS }}/${{ env.MONGODB_DB_NAME }}?retryWrites=true&w=majority"
       - name: Run server
         run: npm start & npx wait-on http://127.0.0.1:${{ env.PORT }}
       - name: Run tests
